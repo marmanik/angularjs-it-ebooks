@@ -1,0 +1,70 @@
+
+<header class="big">
+  <div class="container">
+    <div class="logo">
+      <h1>{{ appSettings.title }}</h1>
+    </div>
+    <div class="row">
+      <div>
+        <div class="col-lg-8 col-lg-offset-2">
+          <form ng-submit="searchByQuery(query)">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" maxlength="50" class="form-control" placeholder="ISBN, Title, Author, or Keyword" value="{{ actualQuery }}" ng-model="query">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container" ng-show="hasBooks">
+  <section class="col-xs-12 col-sm-6 col-md-12">
+    <hgroup class="mb20">
+      <h2>Search Results</h2>
+      <h3 class="lead">
+        <strong class="text-danger">{{ books.Total }}</strong>
+        results were found for the search for
+        <strong class="text-danger">{{ actualQuery }}</strong>
+      </h3>
+    </hgroup>
+    <pagination ng-show="hasPages" total-items="books.Total" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="searchByQueryPage(actualQuery, currentPage)"></pagination>
+    <article class="search-result row" ng-repeat="book in books.Books" class="repeat-animation">
+      <div class="col-xs-12 col-sm-12 col-md-3">
+        <a href="#/bookDetails/{{ book.ID }}" target="_blank" title="{{ book.Title }}" class="thumbnail">
+          <img ng-src="{{ book.Image }}" alt="{{ book.Title }}" />
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-2">
+        <ul class="meta-search">
+          <li><i class="glyphicon glyphicon-barcode"></i>  <span>ISBN : {{ book.isbn }}</span>
+          </li>
+          <li><i class="glyphicon glyphicon-tags"></i>  <span>ID : {{ book.ID }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+        <h3><a href="#/bookDetails/{{ book.ID }}" target="_blank" title="{{ book.Title }}">{{ book.Title }}</a></h3>
+        <p>{{ book.SubTitle }}</p>
+        <p>{{ book.Description }}</p>
+      </div>
+      <span class="clearfix borda"></span>
+    </article>
+    <pagination ng-show="hasPages" total-items="books.Total" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="searchByQueryPage(actualQuery, currentPage)"></pagination>
+    <pre ng-show="hasPages">Page: {{ currentPage }} / {{numPages}}</pre>
+    <footer>
+      <div>
+        Version: {{ appSettings.version }}
+      </div>
+      <div>
+        {{ appSettings.copyrights }}
+      </div>
+    </footer>
+
+  </section>
+</div>
+

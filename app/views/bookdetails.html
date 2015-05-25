@@ -1,0 +1,68 @@
+<header class="big">
+  <div class="container">
+    <div class="logo">
+      <h1></h1>
+    </div>
+    <div class="row">
+      <div>
+        <div class="col-lg-8 col-lg-offset-2">
+          <form>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" maxlength="50" class="form-control" placeholder="ISBN, Title, Author, or Keyword" value="{{ actualQuery }}" ng-model="query">
+                <div class="input-group-btn">
+                  <a href="#/search/{{ query }}" class="btn btn-default btn-primary">Search</a><i class="glyphicon glyphicon-search"></i>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  </br>
+  <section class="col-xs-12 col-sm-6 col-md-12">
+    <article class="search-result row">
+      <div class="col-xs-12 col-sm-12 col-md-3">
+        <a href="#/books/{{ book.ID }}" title="{{ book.Title }}" class="thumbnail">
+          <img ng-src="{{ book.Image }}" alt="{{ book.Title }}" />
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-2">
+        <ul class="meta-search">
+          <li><i class="glyphicon glyphicon-calendar"></i>  <span>YEAR : {{ book.Year }}</span>
+          </li>
+          <li><i class="glyphicon glyphicon-book"></i>  <span>PAGES : {{ book.Page }}</span>
+          </li>
+          <li><i class="glyphicon glyphicon-barcode"></i>  <span>ISBN : {{ book.ISBN }}</span>
+          </li>
+          <li><i class="glyphicon glyphicon-tags"></i>  <span>ID : {{ book.ID }}</span>
+          </li>
+          <li><i class="glyphicon glyphicon-cloud-download"></i><a href="{{ book.Download }}" target="_blank" class="btn btn-default btn-primary" title="Download">Download</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+        <h2><a href="#/books/{{ book.ID }}" title="{{ book.Title }}">{{ book.Title }}</a></h2>
+        <h3>{{ book.SubTitle }}</h3>
+        <p>AUTHOR : <a href="#/search/{{ book.Author }}">{{ book.Author }}</a>
+        </p>
+        <p>PUBLISHER : <a href="#/search/{{ book.Publisher }}">{{ book.Publisher }}</a>
+        </p>
+        <p>{{ book.Description }}</p>
+      </div>
+      <span class="clearfix borda"></span>
+    </article>
+    <footer>
+      <div>
+        Version: {{ appSettings.version }}
+      </div>
+      <div>
+        {{ appSettings.copyrights }}
+      </div>
+    </footer>
+  </section>
+</div>
